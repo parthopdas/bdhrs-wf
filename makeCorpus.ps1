@@ -6,13 +6,13 @@
 # conda activate bodhirasa
 
 $rootFolder = $PSScriptRoot
-$suttaName = "an"
+$suttaName = "mn" # "an", "dn", "sn", "mn"
 $corpusRoot = "D:\src\gh\sc\bilara-data\root\pli\ms\sutta\$suttaName"
-$suttaText = "$rootFolder\$suttaName.txt"
+$suttaText = "$rootFolder\corpus\$suttaName.txt"
 
 Get-ChildItem -rec -filt * -file $corpusRoot | ForEach-Object {
   $json = Get-Content $_.FullName -Encoding UTF8 | ConvertFrom-Json
   $json | Get-Member -MemberType NoteProperty | ForEach-Object {
     $json.($_.Name)
   }
-}
+} >$suttaText
